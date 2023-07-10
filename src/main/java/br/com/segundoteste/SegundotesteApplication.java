@@ -2,10 +2,12 @@ package br.com.segundoteste;
 
 import java.util.Scanner;
 
+import br.com.segundoteste.services.CandidatoService;
+
 public class SegundotesteApplication {
 
 	public static void main(String[] args) {
-		Segundo sistemaRH = new Segundo();
+		CandidatoService sistemaRH = new CandidatoService();
 		Scanner scanner = new Scanner(System.in);
 		boolean executando = true;
 

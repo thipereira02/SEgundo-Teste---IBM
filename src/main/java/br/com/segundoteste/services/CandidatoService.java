@@ -1,10 +1,13 @@
-package br.com.segundoteste;
+package br.com.segundoteste.services;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Segundo {
+import br.com.segundoteste.entities.Candidato;
+import br.com.segundoteste.exceptions.CandidatoException;
+
+public class CandidatoService {
     private List<Candidato> listaCandidatos = new ArrayList<Candidato>();
 
     public int iniciarProcesso(String nome) throws CandidatoException.NomeInvalidoException, CandidatoException.CandidatoExistenteException, CandidatoException.CandidatoNaoEncontradoException{

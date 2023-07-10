@@ -1,4 +1,4 @@
-package br.com.segundoteste;
+package br.com.segundoteste.exceptions;
 
 public class CandidatoException {
     public static class NomeInvalidoException extends Exception {

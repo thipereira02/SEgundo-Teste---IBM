@@ -1,4 +1,4 @@
-package br.com.segundoteste;
+package br.com.segundoteste.entities;
 
 public class Candidato {
     private int id;
