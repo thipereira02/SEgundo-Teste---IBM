@@ -36,4 +36,10 @@ public class CandidatoController {
         int codCandidato = requestBody.get("codCandidato");
         candidatoService.desqualificarCandidato(codCandidato);
     }
+
+    @PostMapping("/approve")
+    public void aprovarCandidato(@RequestBody Map<String, Integer> requestBody) throws CandidatoException {
+        int codCandidato = requestBody.get("codCandidato");
+        candidatoService.aprovarCandidato(codCandidato);
+    }
 }
