@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 import br.com.segundoteste.utils.GeradorId;
 import br.com.segundoteste.entities.Candidato;
 import br.com.segundoteste.exceptions.CandidatoException;
+import br.com.segundoteste.repositories.CandidatoRepository;
 
 @Service
 public class CandidatoService {
     private List<Candidato> listaCandidatos = new ArrayList<Candidato>();
     private GeradorId geradorId;
+    private CandidatoRepository candidatoRepository;
 
-    public CandidatoService(GeradorId geradorId) {
+    public CandidatoService(GeradorId geradorId, CandidatoRepository candidatoRepository) {
         this.geradorId = geradorId;
+        this.candidatoRepository = candidatoRepository;
     }
 
     public int iniciarProcesso(String nome) throws CandidatoException.BadRequestException, CandidatoException.ConflictException {
@@ -30,12 +33,12 @@ public class CandidatoService {
 
     int id = geradorId.gerarId();
     Candidato candidato = new Candidato(id, nome, "Recebido");
-    listaCandidatos.add(candidato);
+    candidatoRepository.adicionarCandidato(candidato);
     return id;
 }
 
     public void marcarEntrevista(int codCandidato) throws CandidatoException.NotFoundException{
-        Candidato candidato = buscarPorId(codCandidato);
+        Candidato candidato = candidatoRepository.buscarPorId(codCandidato);
 
         if (candidato != null){
             if (candidato.getStatus().equals("Recebido")){
@@ -48,18 +51,8 @@ public class CandidatoService {
         }
     }
 
-    public Candidato buscarPorId(int codCandidato){
-        for (Candidato candidato : listaCandidatos){
-            if (candidato.getId() == codCandidato){
-                return candidato;
-            }
-        }
-
-        return null;
-    }
-
     public void desqualificarCandidato(int codCandidato) throws CandidatoException.NotFoundException{
-        Candidato candidato = buscarPorId(codCandidato);
+        Candidato candidato = candidatoRepository.buscarPorId(codCandidato);
 
         if (candidato != null) {
             listaCandidatos.remove(candidato);
@@ -69,7 +62,7 @@ public class CandidatoService {
     }
 
     public String verificarStatusCandidato(int codCandidato) throws CandidatoException.NotFoundException{
-        Candidato candidato = buscarPorId(codCandidato);
+        Candidato candidato = candidatoRepository.buscarPorId(codCandidato);
 
         if (candidato != null) {
             return candidato.getStatus();
@@ -79,7 +72,7 @@ public class CandidatoService {
     }
 
     public void aprovarCandidato(int codCandidato) throws CandidatoException.NotFoundException{
-        Candidato candidato = buscarPorId(codCandidato);
+        Candidato candidato = candidatoRepository.buscarPorId(codCandidato);
 
         if (candidato != null) {
             if (candidato.getStatus().equals("Qualificado")){
