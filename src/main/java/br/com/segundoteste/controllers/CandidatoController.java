@@ -30,4 +30,10 @@ public class CandidatoController {
         int codCandidato = requestBody.get("codCandidato");
         candidatoService.marcarEntrevista(codCandidato);
     }
+
+    @PostMapping("/disqualify")
+    public void desqualificarCandidato(@RequestBody Map<String, Integer> requestBody) throws CandidatoException {
+        int codCandidato = requestBody.get("codCandidato");
+        candidatoService.desqualificarCandidato(codCandidato);
+    }
 }
