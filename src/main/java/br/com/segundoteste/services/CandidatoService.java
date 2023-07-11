@@ -2,16 +2,20 @@ package br.com.segundoteste.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
 
+import br.com.segundoteste.utils.GeradorId;
 import br.com.segundoteste.entities.Candidato;
 import br.com.segundoteste.exceptions.CandidatoException;
 
 @Service
 public class CandidatoService {
     private List<Candidato> listaCandidatos = new ArrayList<Candidato>();
+    private GeradorId geradorId;
+
+    public CandidatoService(GeradorId geradorId) {
+        this.geradorId = geradorId;
+    }
 
     public int iniciarProcesso(String nome) throws CandidatoException.BadRequestException, CandidatoException.ConflictException {
     if (nome == null || nome.isEmpty() || !nome.matches("[a-zA-Z ]+")) {
@@ -24,17 +28,11 @@ public class CandidatoService {
         }
     }
 
-    int id = gerarId();
+    int id = geradorId.gerarId();
     Candidato candidato = new Candidato(id, nome, "Recebido");
     listaCandidatos.add(candidato);
     return id;
 }
-
-    private int gerarId(){
-        UUID uuid = UUID.randomUUID();
-        String idString = uuid.toString().replace("-", "");
-        return Math.abs(idString.hashCode());
-    }
 
     public void marcarEntrevista(int codCandidato) throws CandidatoException.NotFoundException{
         Candidato candidato = buscarPorId(codCandidato);
