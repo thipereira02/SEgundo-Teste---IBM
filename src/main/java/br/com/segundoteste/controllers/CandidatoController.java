@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Map;
+import java.util.List;
+
 
 import br.com.segundoteste.exceptions.CandidatoException;
 import br.com.segundoteste.services.CandidatoService;
+import br.com.segundoteste.entities.Candidato;
 
 @RestController
 @RequestMapping("/api/v1/hiring")
@@ -48,5 +51,10 @@ public class CandidatoController {
     @GetMapping("/status/candidate/{codCandidato}")
     public String verificarStatusCandidato(@PathVariable int codCandidato) throws CandidatoException {
         return candidatoService.verificarStatusCandidato(codCandidato);
+    }
+
+    @GetMapping("/approved")
+    public List<Candidato> obterAprovados() {
+        return candidatoService.obterAprovados();
     }
 }

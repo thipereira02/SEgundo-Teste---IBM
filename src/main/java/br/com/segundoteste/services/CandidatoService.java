@@ -1,8 +1,8 @@
 package br.com.segundoteste.services;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import br.com.segundoteste.utils.GeradorId;
 import br.com.segundoteste.entities.Candidato;
@@ -85,14 +85,7 @@ public class CandidatoService {
         }
     }
 
-    public List<Candidato> obterAprovados(){
-        List<Candidato> aprovados = new ArrayList<Candidato>();
-        for (Candidato candidato : listaCandidatos){
-            if (candidato.getStatus().equals("Aprovado")){
-                aprovados.add(candidato);
-            }
-        }
-
-        return aprovados;
+    public List<Candidato> obterAprovados() {
+        return candidatoRepository.obterAprovados();
     }
 }
