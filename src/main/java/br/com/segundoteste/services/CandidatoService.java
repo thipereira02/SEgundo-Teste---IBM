@@ -14,7 +14,7 @@ public class CandidatoService {
     private List<Candidato> listaCandidatos = new ArrayList<Candidato>();
 
     public int iniciarProcesso(String nome) throws CandidatoException.BadRequestException, CandidatoException.ConflictException {
-    if (nome == null || nome.isEmpty()) {
+    if (nome == null || nome.isEmpty() || !nome.matches("[a-zA-Z ]+")) {
         throw new CandidatoException.BadRequestException();
     }
 
