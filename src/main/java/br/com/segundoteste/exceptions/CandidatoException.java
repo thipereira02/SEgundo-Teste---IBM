@@ -1,20 +1,24 @@
 package br.com.segundoteste.exceptions;
 
-public class CandidatoException {
-    public static class NomeInvalidoException extends Exception {
-        public NomeInvalidoException() {
+public class CandidatoException extends RuntimeException {
+    public CandidatoException(String message) {
+        super(message);
+    }
+    
+    public static class BadRequestException extends CandidatoException {
+        public BadRequestException() {
             super("Nome inválido.");
         }
     }
-
-    public static class CandidatoExistenteException extends Exception {
-        public CandidatoExistenteException() {
+    
+    public static class ConflictException extends CandidatoException {
+        public ConflictException() {
             super("Candidato já participa do processo.");
         }
     }
-
-    public static class CandidatoNaoEncontradoException extends Exception {
-        public CandidatoNaoEncontradoException() {
+    
+    public static class NotFoundException extends CandidatoException {
+        public NotFoundException() {
             super("Candidato não encontrado.");
         }
     }

@@ -2,9 +2,26 @@ package br.com.segundoteste.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
+
+import br.com.segundoteste.exceptions.CandidatoException;
+import br.com.segundoteste.services.CandidatoService;
 
 @RestController
-@RequestMapping("/api/v1/candidatos")
+@RequestMapping("/api/v1/hiring")
 public class CandidatoController {
     
+    private CandidatoService candidatoService;
+
+    public CandidatoController(CandidatoService candidatoService) {
+        this.candidatoService = candidatoService;
+    }
+
+    @PostMapping("/start")
+    public int iniciarProcesso(@RequestBody Map<String, String> requestBody) throws CandidatoException {
+        String nome = requestBody.get("nome");
+        return candidatoService.iniciarProcesso(nome);
+    }
 }
