@@ -2,6 +2,8 @@ package br.com.segundoteste.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Map;
@@ -41,5 +43,10 @@ public class CandidatoController {
     public void aprovarCandidato(@RequestBody Map<String, Integer> requestBody) throws CandidatoException {
         int codCandidato = requestBody.get("codCandidato");
         candidatoService.aprovarCandidato(codCandidato);
+    }
+
+    @GetMapping("/status/candidate/{codCandidato}")
+    public String verificarStatusCandidato(@PathVariable int codCandidato) throws CandidatoException {
+        return candidatoService.verificarStatusCandidato(codCandidato);
     }
 }
