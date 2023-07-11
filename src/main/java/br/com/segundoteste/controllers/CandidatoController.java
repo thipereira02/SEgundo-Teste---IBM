@@ -24,4 +24,10 @@ public class CandidatoController {
         String nome = requestBody.get("nome");
         return candidatoService.iniciarProcesso(nome);
     }
+
+    @PostMapping("/schedule")
+    public void marcarEntrevista(@RequestBody Map<String, Integer> requestBody) throws CandidatoException {
+        int codCandidato = requestBody.get("codCandidato");
+        candidatoService.marcarEntrevista(codCandidato);
+    }
 }
