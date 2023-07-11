@@ -21,7 +21,7 @@ public class CandidatoService {
     }
 
     public int iniciarProcesso(String nome) throws CandidatoException.BadRequestException, CandidatoException.ConflictException {
-    if (nome == null || nome.isEmpty() || !nome.matches("[a-zA-Z ]+")) {
+    if (nome == null || nome.isEmpty() || !nome.matches("[\\p{L}\\s]+")) {
         throw new CandidatoException.BadRequestException();
     }
 
