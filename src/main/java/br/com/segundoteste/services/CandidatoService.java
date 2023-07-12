@@ -21,21 +21,21 @@ public class CandidatoService {
     }
 
     public int iniciarProcesso(String nome) throws CandidatoException.BadRequestException, CandidatoException.ConflictException {
-    if (nome == null || nome.isEmpty() || !nome.matches("[\\p{L}\\s]+")) {
-        throw new CandidatoException.BadRequestException();
-    }
+        if (nome == null || nome.isEmpty() || !nome.matches("[\\p{L}\\s]+")) {
+            throw new CandidatoException.BadRequestException();
+        }
 
-    for (Candidato candidato : listaCandidatos) {
-        if (candidato.getNome().equals(nome)) {
+        Candidato candidatoExistente = candidatoRepository.buscarPorNome(nome);
+        if (candidatoExistente != null) {
             throw new CandidatoException.ConflictException();
         }
-    }
 
-    int id = geradorId.gerarId();
-    Candidato candidato = new Candidato(id, nome, "Recebido");
-    candidatoRepository.adicionarCandidato(candidato);
-    return id;
-}
+
+        int id = geradorId.gerarId();
+        Candidato candidato = new Candidato(id, nome, "Recebido");
+        candidatoRepository.adicionarCandidato(candidato);
+        return id;
+    }
 
     public void marcarEntrevista(int codCandidato) throws CandidatoException.NotFoundException{
         Candidato candidato = candidatoRepository.buscarPorId(codCandidato);

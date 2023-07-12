@@ -13,6 +13,15 @@ public class CandidatoRepository {
         this.listaCandidatos = new ArrayList<>();
     }
 
+    public Candidato buscarPorNome(String nome) {
+        for (Candidato candidato : listaCandidatos) {
+            if (candidato.getNome().equals(nome)) {
+                return candidato;
+            }
+        }
+        return null;
+    }
+
     public Candidato buscarPorId(int codCandidato){
         for (Candidato candidato : listaCandidatos){
             if (candidato.getId() == codCandidato){
