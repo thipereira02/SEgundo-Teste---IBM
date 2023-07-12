@@ -56,6 +56,7 @@ public class CandidatoService {
 
         if (candidato != null) {
             listaCandidatos.remove(candidato);
+            candidatoRepository.removerCandidato(candidato);
         } else {
             throw new CandidatoException.NotFoundException();
         }

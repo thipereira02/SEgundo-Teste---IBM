@@ -35,6 +35,10 @@ public class CandidatoRepository {
         listaCandidatos.add(candidato);
     }
 
+    public void removerCandidato(Candidato candidato) {
+        listaCandidatos.remove(candidato);
+    }
+
     public List<Candidato> obterAprovados() {
         List<Candidato> aprovados = new ArrayList<>();
         for (Candidato candidato : listaCandidatos) {
