@@ -1,4 +1,4 @@
-# Segundo-Teste_IBM
+# Controle de seleção de candidatos
 
 Este é um projeto de exemplo que demonstra um sistema de controle de candidatos para um processo de seleção. O objetivo do projeto é gerenciar o fluxo de candidatos, desde o registro inicial até a aprovação ou desqualificação.
 
